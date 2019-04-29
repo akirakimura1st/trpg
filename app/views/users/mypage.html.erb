@@ -1,0 +1,90 @@
+<div class="container-fluid">
+<div class="block_insert"></div>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="left_side_bar1">
+				<div class="label">
+				<p>ユ ー ザ ー 情 報</p>
+				</div>
+				<%= link_to users_edit_path do %>
+				<div class="user_image_field">
+					<%= attachment_image_tag @user, :profile_image, format: 'png', fallback: "no_image.jpg", class:"user_image1" %>
+				</div>
+				<% end %>
+				<div class="user_info_field">
+					<hr>
+						<p>ようこそ、<%= @user.user_name %>さん！</p>
+						<p>メールアドレス：<%= @user.email %></p>
+						<p>最終更新 <i class="fas fa-redo"></i>：<%= @user.updated_at.strftime("%Y年%-m月%-d日 %-H時%-M分") %></p>
+						<p>ボイスセッション <i class="fas fa-microphone-alt"></i>：<%= @user.voice_chat %></p>
+						<p>テキストセッション <i class="fas fa-comment-alt"></i>：<%= @user.text_chat %></p>
+						<hr>
+						<%= link_to '日記を投稿する', new_diary_path %>
+						<hr>
+						<%= link_to 'コミュニティを作成する', new_community_path %>
+						<hr>
+						<%= link_to 'クトゥルフ神話シート作成', new_cthulhu_path %>
+						<hr>
+						<%= link_to '新規セッション作成', new_session_recruitment_path %>
+					</div>
+			</div>
+	</div>
+	<div class="col-md-6">
+		<div class="user_middle_fieild">
+			<div class="label">
+				<p>作 成 し た キ ャ ラ シ 合 計 ： <%= @cthulhu_count %> 件</p>
+			</div>
+				<div class="character_sheet">
+				<% if @cthulhu.blank? %>
+					<p class="null_text">まだキャラシは作成されていません。</p>
+				<% else %>
+					<% @cthulhu.first(5).each do |s| %>
+						<%= link_to cthulhu_path(s.id) do %>
+							<%= attachment_image_tag s, :character_image, :fill, 300, 300, format: 'png', fallback: "no_image.jpg", size: '40x40', class:"user_image" %>
+						<% end %>
+						<%= link_to cthulhu_path(s.id) do %><%= s.character_name.truncate(16) %><% end %> 作成者：<%= s.user.user_name.truncate(16) %> 作成日：<%= s.created_at.strftime('%m月%d日') %> 更新日：<%= s.updated_at.strftime('%m月%d日') %>
+						<hr>
+					<% end %>
+				<% end %>
+				<div class="character_sheet_index">
+					<%= link_to 'キャラクターシート一覧', cthulhus_path %>
+				</div>
+			</div>
+		</div>
+	<div class="user_middle_fieild">
+			<div class="label">
+				<p>作 成 し た 日 記 合 計 ： <%= @diary_count %> 件</p>
+			</div>
+				<div class="character_sheet">
+				<% if @diary.blank? %>
+					<p class="null_text">まだキャラシは作成されていません。</p>
+				<% else %>
+					<% @diary.first(5).each do |s| %>
+						【<%= link_to diary_path(s.id) do %><%= s.title.truncate(16) %><% end %>】<%= s.body.truncate(24) %>  作成日：<%= s.created_at.strftime('%m月%d日') %> 更新日：<%= s.updated_at.strftime('%m月%d日') %>
+						<hr>
+					<% end %>
+				<% end %>						<div class="character_sheet_index">
+							<%= link_to '作成した日記一覧', diaries_path %>
+						</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="right_side_bar">
+			<div class="label">
+				<p>所 属 コ ミ ュ ニ テ ィ</p>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div class="block_insert"></div>
+		<div class="row">
+			<div class="col-md">
+				<div class="bottom_field">
+					Bottom Field.(お問い合わせやヘルプリンク等表示)
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

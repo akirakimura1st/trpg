@@ -1,0 +1,30 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md">
+			<div class="row">
+				<div class="col-md-6"></div>
+				<div class="col-md-6">
+					<%= search_form_for @q do |f| %>
+						<div class="search_field"><%= f.search_field :user_name_cont, class:"search_fieldm", placeholder:"ユーザー名検索"%><%= f.submit "検索", class:"submit_btn" %></div>
+					<% end %>
+				</div>
+			</div>
+			<table class="table">
+				<tr class="thead_custom">
+					<th width="65" class="fa_images_align"><i class="fas fa-images"></i></th>
+					<th>ユーザーネーム</th>
+					<th>更新時間</th>
+				</tr>
+				<% @users.each do |u| %>
+					<tr class="tbody">
+						<td class="tbody"><%= attachment_image_tag u, :profile_image, class:"user_image",size:"30x30" %></td>
+
+							<td class="line_height tbody"><%= link_to user_path(u.id) do %><%= u.user_name %><% end %></td>
+
+						<td class="line_height tbody"><%= u.updated_at.strftime("%Y年%-m月%-d日 %-H時%-M分") %></td>
+					</tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>

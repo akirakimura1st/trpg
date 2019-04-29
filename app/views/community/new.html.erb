@@ -1,0 +1,21 @@
+<div class="block_insert"></div>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<%= form_for @community, url: community_index_path, html: {method: 'POST'} do |c| %>
+				<p>コミュニティの名前</p>
+				<%= c.text_field :community_title, class:"text_field" %>
+				<p>コミュニティのアイコン</p>
+				<%= c.attachment_field :community_image %>
+				<p>コミュニティタイプ</p>
+				<%= c.text_field :community_type, class:"text_field" %>
+				<p>コミュニティの概要</p>
+				<%= c.text_area :community_detail, class:"text_field" %>
+				<% user_id = current_user.id %>
+				<%= c.submit '新規作成', class:"btn btn-reg" %>
+			<% end %>
+		<div class="col-md-2"></div>
+		</div>
+	</div>
+</div>

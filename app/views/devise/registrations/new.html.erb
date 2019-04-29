@@ -1,0 +1,36 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12 login_field">
+			<div class="form-group">
+				<div class="label1">
+					<p>新 規 登 録</p>
+				</div>
+				<div class="login_fields">
+
+					<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+							<p>お名前</p>
+							<%= f.text_field :user_name, autofocus: true, :placeholder => "ニックネームを推奨します", class:"text_field" %>
+
+							<p>Eメールアドレス</p>
+							<%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "Eメールアドレス", class:"text_field" %>
+
+							<p>パスワード</p>
+							<% if @minimum_password_length %>
+							<em>(<%= @minimum_password_length %> 文字以上入力してください)</em>
+							<% end %><br />
+						<%= f.password_field :password, autocomplete: "new-password", :placeholder => "パスワード", class:"text_field" %>
+
+							<p>パスワードの確認</p>
+							<%= f.password_field :password_confirmation, autocomplete: "new-password", :placeholder => "パスワードの確認", class:"text_field" %>
+
+						<div class="actions">
+							<%= f.submit "送信", class:"btn btn-dark btn-reg" %>
+						</div>
+					<% end %>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

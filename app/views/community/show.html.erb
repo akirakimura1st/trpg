@@ -1,0 +1,49 @@
+<div class="block_insert"></div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="left_side_bar_community">
+				<div class="label">
+					<p>コ ミ ュ ニ テ ィ</p>
+				</div>
+				<div class="comunity_show">
+				<div class="com_image_field">
+					<%= attachment_image_tag @community, :community_image, :fill, 300, 300, format: 'png', fallback: "no_image.jpg", size: '300x300', class:"community_image_show" %>
+				</div>
+					<p class="community_title"><i class="fas fa-comments"></i><%= @community.community_title %></p>
+					<hr>
+					<p>種別：<%= @community.community_type %></p>
+					<p>管理者：<%= @admin_name.user_name %></p>
+					<p>参加条件：管理者の承認が必要</p>
+					<p>スレッド作成権限：参加者のみ</p>
+					<div class="block_insert"></div>
+					<%= link_to 'コミュニティに参加する', root_path, class:"btn btn-dark" %>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="middle_fieild_community">
+				<div class="label">
+					<p><i class="fas fa-comments"></i><%= @community.community_title %> 概 要 <% if @community.admin_user_id == current_user.try(:id) %><%= link_to '編集', edit_community_path %><% end %></p>
+				</div>
+				<div class="community_detail">
+					<%= simple_format(@community.community_detail) %>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="left_side_bar_community">
+				<div class="label">
+					<p>参 加 し て る ユ ー ザ ー</p>
+				</div>
+				<% @user.order("RANDOM()").limit(10).each do |u| %>
+				<div class="each_user">
+					<%= attachment_image_tag u, :profile_image, size: '30x30', class:"com_image" %>
+					<%= u.user_name %>
+				</div>
+				<hr>
+					<% end %>
+			</div>
+		</div>
+	</div>
+</div>

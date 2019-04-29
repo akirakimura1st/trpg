@@ -1,0 +1,25 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12 login_field">
+			<div class="form-group">
+				<div class="label1">
+					<p>ログイン</p>
+				</div>
+<div class="login_fields1">
+				<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+						<p>ログイン</p>
+						<%= f.email_field :email, autofocus: true, autocomplete: "email", class:"text_field", :placeholder => "Eメールアドレス" %>
+
+						<p>パスワード</p>
+						<%= f.password_field :password, autocomplete: "current-password", class:"text_field", :placeholder => "パスワード" %>
+
+
+					<div class="actions">
+						<%= f.submit "ログイン", class:"btn btn-dark btn-reg" %>
+					</div>
+				<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

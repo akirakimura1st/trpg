@@ -1,0 +1,14 @@
+		<div class="nested-fields">
+				<tr>
+					<td><%= f.text_field :original_combat_skill_name, class:"size original_name", id:"original_combat_skill_name"  %></td>
+					<td><%= f.number_field :original_combat_skill_defalut, class:"size readonly", id:"original_combat_skill_defalut", readonly: true  %>
+					</td>
+					<td><%= f.number_field :original_combat_add_career, class:"size", id:"original_combat_add_career"  %></td>
+					<td><%= f.number_field :original_combat_add_hobby, class:"size", id:"original_combat_add_hobby"  %></td>
+					<td><%= f.number_field :original_combat_add_auxesis, class:"size", id:"original_combat_add_auxesis"  %></td>
+					<td><%= f.number_field :original_combat_add_etcetera, class:"size", id:"original_combat_add_etcetera"  %>
+					</td>
+					<td><%= f.number_field :original_combat_total, class:"size readonly", id:"original_combat_total", readonly: true  %></td>
+				</tr>
+				<%= link_to_remove_association "remove task", f %>
+		</div>

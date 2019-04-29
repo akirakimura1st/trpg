@@ -1,0 +1,28 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md">
+			<div class="row">
+				<div class="col-md-6"></div>
+				<div class="col-md-6">
+					<%= search_form_for @q do |f| %>
+						<div class="search_field"><%= f.search_field :title_cont, class:"search_fieldm", placeholder:"日記タイトル検索"%><%= f.submit "検索", class:"submit_btn" %></div>
+					<% end %>
+				</div>
+			</div>
+			<table class="table">
+				<tr class="thead_custom">
+					<th>タイトル</th>
+					<th>ユーザー名</th>
+					<th>作成時間</th>
+				</tr>
+				<% @diaries.each do |u| %>
+					<tr class="tbody">
+						<td class="line_height tbody"><%= link_to diary_path(u.id) do %><%= u.title %><% end %></td>
+						<td><%= link_to user_path(u.id) do %><%= u.user.user_name %><% end %></td>
+						<td class="line_height tbody"><%= u.created_at.strftime("%Y年%-m月%-d日 %-H時%-M分") %></td>
+					</tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>

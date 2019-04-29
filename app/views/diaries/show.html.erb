@@ -1,0 +1,39 @@
+<div class="block_insert"></div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="left_side_bar1">
+				<div class="label">
+					<p>ユ ー ザ ー 情 報</p>
+				</div>
+				<div class="user_image_field">
+					<%= attachment_image_tag @user, :profile_image, format: 'png', fallback: "no_image.jpg", class:"user_image1" %>
+				</div>
+				<div class="user_info_field">
+					<hr>
+					<p><%= @user.user_name %>さん</p>
+					<p>最終更新 <i class="fas fa-redo"></i>：<%= @user.updated_at.strftime("%Y年%-m月%-d日 %-H時%-M分") %></p>
+					<p>ボイスセッション <i class="fas fa-microphone-alt"></i>：<%= @user.voice_chat %></p>
+					<p>テキストセッション <i class="fas fa-comment-alt"></i>：<%= @user.text_chat %></p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div class="left_side_bar1">
+				<div class="label">
+					<p>日 記 詳 細</p>
+				</div>
+					<div class="introduction_header label"><%= @diary.title %></div>
+					<div class="user_introduction">
+						<div class="padding_introduction">
+							<%= safe_join(@diary.body.split("\n"), tag(:br))%>
+						</div>
+					</div>
+				<div class="user_info_field">
+					<hr>
+					<p>作成日時 <i class="fas fa-redo"></i>：<%= @diary.created_at.strftime("%Y年%-m月%-d日 %-H時%-M分") %></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

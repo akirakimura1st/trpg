@@ -1,0 +1,31 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="form-group">
+				<%= form_for @session, url: session_recruitments_path, html: {method: 'POST'} do |f| %>
+					<p>プレイするシステム</p>
+					<%= f.text_field :use_system, class:"text_field"  %>
+					<p>セッションタイトル</p>
+					<%= f.text_field :session_name, class:"text_field"  %>
+					<p>GM</p>
+					<%= f.text_field :game_master, class:"text_field"  %>
+					<p>締切</p>
+					<%= f.datetime_field :deadline %>
+					<p>開始日時</p>
+					<%= f.datetime_field :start_date %>
+					<p>予想プレイ時間</p>
+					<%= f.number_field :play_time, class:"text_field"  %>
+					<p>募集人数</p>
+					<%= f.number_field :need_persons, class:"text_field"  %>
+					<p>セッション種別</p>
+					<%= f.text_field :session_type, class:"text_field"  %>
+					<p>セッション詳細</p>
+					<%= f.text_area :session_detail, class:"text_field"  %>
+					<%= f.submit %>
+				<% end %>
+			</div>
+		<div class="col-md-1"></div>
+		</div>
+	</div>
+</div>

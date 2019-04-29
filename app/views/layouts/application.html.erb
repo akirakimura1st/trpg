@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>B O R S C H T</title>
+	<%= csrf_meta_tags %>
+	<%= csp_meta_tag %>
+	<%= favicon_link_tag('favicon.ico') %>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+</head>
+
+<body>
+<div class="wrap"></div>
+<div class="head_on_bar"></div>
+	<% if user_signed_in? %>
+	<nav class="navbar header">
+		<%= link_to root_path do %>
+			<p class="navbar-brand" id="branding"><%= image_tag 'b.png', :size =>'20x20' %> BORSCHT</p>
+		<% end %>
+		<form class="form-inline">
+			<%= link_to root_path do %>
+			<div class="navbar_btn">
+			<p><i class="fas fa-angle-right"></i> TOP <i class="fas fa-home"></i></p>
+			</div>
+			<% end %>
+
+			<%= link_to users_mypage_path do %>
+			<div class="navbar_btn">
+				<p><i class="fas fa-angle-right"></i> マイページ <i class="fas fa-user"></i></p>
+			</div>
+			<% end %>
+
+			<%= link_to session_recruitments_path do %>
+			<div class="navbar_btn">
+				<p><i class="fas fa-angle-right"></i> セッション一覧 <i class="far fa-calendar-alt"></i></i></p>
+			</div>
+			<% end %>
+
+			<%= link_to destroy_user_session_path, method: :delete do %>
+			<div class="navbar_btn">
+				<p><i class="fas fa-angle-right"></i> ログアウト <i class="fas fa-sign-out-alt"></i></p>
+			</div>
+			<% end %>
+		</form>
+	</nav>
+	<% else %>
+		<nav class="navbar">
+			<%= link_to root_path do %>
+				<p class="navbar-brand" id="branding"><%= image_tag 'b.png', :size =>'20x20' %> BORSCHT</p>
+			<% end %>
+		<form class="form-inline">
+			<%= link_to root_path do %>
+			<div class="navbar_btn">
+				<p><i class="fas fa-angle-right"></i> TOP <i class="fas fa-home"></i></p>
+			</div>
+			<% end %>
+
+				<%= link_to session_recruitments_path do %>
+			<div class="navbar_btn">
+				<p><i class="fas fa-angle-right"></i> セッション一覧 <i class="far fa-calendar-alt"></i></i></p>
+			</div>
+			<% end %>
+
+			<%= link_to new_user_session_path do %>
+			<div class="navbar_btn">
+				<p><i class="fas fa-angle-right"></i> ログイン <i class="fas fa-sign-in-alt"></i></p>
+			</div>
+			<% end %>
+
+			<%= link_to new_user_registration_path do %>
+			<div class="navbar_btn">
+				<p><i class="fas fa-angle-right"></i> 新規登録 <i class="fas fa-user-plus"></i></p>
+			</div>
+			<% end %>
+		</form>
+	</nav>
+	<% end %>
+	<div class="detail_site"><marquee scrollamount="10">インフォメーション：<strong>BORSCHT</strong>へようこそ！ ネット上でより楽しくTRPGを遊ぶための機能を公開しております。 この領域ではサイト更新のお知らせなども流してまいります。 暇な時はぜひ眺めてみてください。 現在はクトゥルフ神話TRPGのみキャラクターシートの作成に対応しております。 随時システムの追加などもしていきます。</marquee></div>
+
+		<%= yield %>
+<%# <%= link_to new_cthulhu_path do %>
+	<%# <div class="fixed_btn1"><i class="fas fa-pencil-alt"></i></div> %>
+<%# <% end %>
+<%# <%= link_to new_cthulhu_path do  %>
+	<%# <div class="fixed_btn2"><i class="far fa-calendar-alt"></i></div> %>
+<%# <% end %>
+	<footer class="footer_field" id="footer">
+		<div class="container-fluid copyright">
+			<div class="row">
+				<div class="col-md">
+					<address>Copyright(C)2019 A.KIMURA.</address>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+</body>
+
+</html>

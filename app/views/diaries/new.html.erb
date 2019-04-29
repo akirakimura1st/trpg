@@ -1,0 +1,21 @@
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<div class="form-group">
+				<%= form_for @diary do |d| %>
+
+					<p>タイトル</p>
+					<%= d.text_field :title, class:"text_field", maxlength:"70" %>
+					<p>内容</p>
+					<%= d.text_area :body, class:"area_field", maxlength:"1000" %>
+					<p>ネタバレ</p>
+					<%= d.select :spiler, [["あり", "あり"], ["なし", "なし"]], {:class => "select_box"} %>
+					<div class="block_insert"></div>
+					<%= d.submit "作成", class:"btn btn-reg" %>
+				<% end %>
+			</div>
+		</div>
+	<div class="col-md-2"></div>
+	</div>
+</div>

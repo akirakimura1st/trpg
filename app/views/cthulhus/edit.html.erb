@@ -1,0 +1,1265 @@
+<div class="block_insert"></div>
+<div class="container-fluid">
+	<div class="form-row">
+		<div class="col-md-3">
+			<%= form_with model: @cthulhu, local: true do |f| %>
+			<p>キャラクターネーム</p>
+			<%= f.text_field :character_name, class:"text_field" %>
+			<p>キャラクター画像</p>
+			<%= f.attachment_field :character_image %>
+			<p>タグ</p>
+			<%= f.text_field :sheet_tag, class:"text_field" %>
+			<p>職業</p>
+			<%= f.text_field :job, class:"text_field" %>
+			<p>年齢</p>
+			<%= f.text_field :character_age, class:"text_field" %>
+			<p>性別</p>
+			<%= f.text_field :character_sexuality, class:"text_field" %>
+			<p>身長</p>
+			<%= f.text_field :character_height, class:"text_field" %>
+			<p>体重</p>
+			<%= f.text_field :character_weight, class:"text_field" %>
+			<p>出身</p>
+			<%= f.text_field :character_hometown, class:"text_field" %>
+			<p>髪の色</p>
+			<%= f.text_field :character_hair_color, class:"text_field" %>
+			<p>目の色</p>
+			<%= f.text_field :character_eye_color, class:"text_field" %>
+			<p>肌の色</p>
+			<%= f.text_field :character_skin_color, class:"text_field" %>
+			<p>独自追加</p>
+			<%= f.text_field :original_personal_data_id , class:"text_field"%>
+			<p>その他追記</p>
+			<%= f.text_area :character_career_etcetera, class:"area_field" %>
+			<%= f.submit "作成なのですわ！", :class=>"btn_1" %>
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-7">
+			<table border='1' bordercolor="black">
+				<tr class="background">
+					<th><input type="button" class="btn_2" value="ランダムで決める" onclick="randomStatusBtn();"></th>
+					<th>STR</th>
+					<th>CON</th>
+					<th>POW</th>
+					<th>DEX</th>
+					<th>APP</th>
+					<th>SIZ</th>
+					<th>INT</th>
+					<th>EDU</th>
+					<th>HP</th>
+					<th>MP</th>
+					<th>SAN</th>
+					<th>IDEA</th>
+					<th>幸運</th>
+					<th>知識</th>
+				</tr>
+				<tr>
+					<td class="background">能力値</td>
+					<td><%= f.number_field :str,class:"str size",id:"str", onChange:"keisan()" %></td>
+					<td><%= f.number_field :con,class:"con size",id:"con", onChange:"keisan()" %></td>
+					<td><%= f.number_field :pow,class:"pow size",id:"pow", onChange:"keisan()" %></td>
+					<td><%= f.number_field :dex,class:"dex size",id:"dex", onChange:"keisan()" %></td>
+					<td><%= f.number_field :app,class:"app size",id:"app", onChange:"keisan()" %></td>
+					<td><%= f.number_field :siz,class:"siz size",id:"siz", onChange:"keisan()" %></td>
+					<td><%= f.number_field :int,class:"int size",id:"int", onChange:"keisan()" %></td>
+					<td><%= f.number_field :edu,class:"edu size",id:"edu", onChange:"keisan()" %></td>
+					<td><%= f.number_field :hitpoint,class:"hitpoint size readonly",id:"hitpoint",readonly: true %></td>
+					<td><%= f.number_field :magicpoint,class:"magicpoint size readonly",id:"magicpoint",readonly: true %></td>
+					<td><%= f.number_field :default_san,class:"default_san size readonly",id:"default_san",readonly: true %>
+					</td>
+					<td><%= f.number_field :idea, class:"idea size readonly", id: "idea", readonly: true %></td>
+					<td><%= f.number_field :luck, class:"luck size readonly", id: "luck", readonly: true %></td>
+					<td><%= f.number_field :knowledge, class:"knowledge size readonly", id: "knowledge", readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">一時的増減</td>
+					<td><%= f.number_field :str_temporary_increase, id:"", class:"size" %></td>
+					<td><%= f.number_field :con_temporary_increase, id:"", class:"size" %></td>
+					<td><%= f.number_field :pow_temporary_increase, id:"", class:"size" %></td>
+					<td><%= f.number_field :dex_temporary_increase, id:"", class:"size" %></td>
+					<td><%= f.number_field :app_temporary_increase, id:"", class:"size" %></td>
+					<td><%= f.number_field :siz_temporary_increase, id:"", class:"size" %></td>
+					<td><%= f.number_field :int_temporary_increase, id:"", class:"size" %></td>
+					<td><%= f.number_field :edu_temporary_increase, id:"", class:"size" %></td>
+					<td><%= f.number_field :hitpoint_temporary_increase, id:"", class:"size" %></td>
+					<td><%= f.number_field :magicpoint_temporary_increase, id:"", class:"size" %></td>
+					<td><%= f.number_field :default_san_temporary_increase, id:"", class:"size" %></td>
+					<td><%= f.number_field :idea_temporary_increase, id:"", class:"size" %></td>
+					<td><%= f.number_field :luck_temporary_increase, id:"", class:"size" %></td>
+					<td><%= f.number_field :knowledge_temporary_increase, id:"", class:"size" %></td>
+				</tr>
+				<tr>
+					<td class="background">その他増加分</td>
+					<td><%= f.number_field :str_gain, class:"size", id:"" %></td>
+					<td><%= f.number_field :con_gain, class:"size", id:"" %></td>
+					<td><%= f.number_field :pow_gain, class:"size", id:"" %></td>
+					<td><%= f.number_field :dex_gain, class:"size", id:"" %></td>
+					<td><%= f.number_field :app_gain, class:"size", id:"" %></td>
+					<td><%= f.number_field :siz_gain, class:"size", id:"" %></td>
+					<td><%= f.number_field :int_gain, class:"size", id:"" %></td>
+					<td><%= f.number_field :edu_gain, class:"size", id:"" %></td>
+					<td><%= f.number_field :hitpoint_gain, class:"size", id:"" %></td>
+					<td><%= f.number_field :magicpoint_gain, class:"size", id:"" %></td>
+					<td><%= f.number_field :default_san_gain, class:"size", id:"" %></td>
+					<td><%= f.number_field :idea_gain, class:"size", id:"" %></td>
+					<td><%= f.number_field :luck_gain, class:"size", id:"" %></td>
+					<td><%= f.number_field :knowledge_gain, class:"size", id:"" %></td>
+				</tr>
+				<tr>
+					<td class="background">合計値</td>
+					<td><%= f.number_field :str_total, class:"size readonly", id:"", readonly: true %></td>
+					<td><%= f.number_field :con_total, class:"size readonly", id:"", readonly: true %></td>
+					<td><%= f.number_field :pow_total, class:"size readonly", id:"", readonly: true %></td>
+					<td><%= f.number_field :dex_total, class:"size readonly", id:"", readonly: true %></td>
+					<td><%= f.number_field :app_total, class:"size readonly", id:"", readonly: true %></td>
+					<td><%= f.number_field :siz_total, class:"size readonly", id:"", readonly: true %></td>
+					<td><%= f.number_field :int_total, class:"size readonly", id:"", readonly: true %></td>
+					<td><%= f.number_field :edu_total, class:"size readonly", id:"", readonly: true %></td>
+					<td><%= f.number_field :hitpoint_total, class:"size readonly", id:"", readonly: true %></td>
+					<td><%= f.number_field :magicpoint_total, class:"size readonly", id:"", readonly: true %></td>
+					<td><%= f.number_field :default_san_total, class:"size readonly", id:"", readonly: true %></td>
+					<td><%= f.number_field :idea_total, class:"size readonly", id:"", readonly: true %></td>
+					<td><%= f.number_field :luck_total, class:"size readonly", id:"", readonly: true %></td>
+					<td><%= f.number_field :knowledge_total, class:"size readonly", id:"", readonly: true %></td>
+				</tr>
+				<tr class="background">
+					<td><input type="button" class="btn_3" value="クリア" onclick="randomStatusBtnCrear();"></td>
+					<th>STR</th>
+					<th>CON</th>
+					<th>POW</th>
+					<th>DEX</th>
+					<th>APP</th>
+					<th>SIZ</th>
+					<th>INT</th>
+					<th>EDU</th>
+					<th>HP</th>
+					<th>MP</th>
+					<th>SAN</th>
+					<th>IDEA</th>
+					<th>幸運</th>
+					<th>知識</th>
+				</tr>
+			</table>
+			<div class="field_3">
+
+			</div>
+
+			<div class="block_insert"></div>
+			<div class="form-row">
+				<div class="col-md-6">
+					<table border='1' bordercolor="black">
+						<tr>
+							<td class="background">現在SAN値:<%= f.number_field :default_san_now, class:"size", id:"default_san_now" %>
+							</td>
+							<td class="background">
+								/<%= f.number_field :default_san_total, class:"size readonly", id:"default_san_total",readonly: true %>
+							</td>
+							<td class="background">
+								(不定領域:<%= f.number_field :default_san_unstable_region, class:"size", id:"default_san_unstable_region" %>)
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-md-6">
+					<table border='1' bordercolor="black">
+						<tr>
+							<td class="background">職業P</td>
+							<td><%= f.number_field :career_skills, class:"size readonly", id:"career_skills", readonly: true %></td>
+							<td>/<%= f.number_field :career_skills, class:"size readonly", id:"career_skills_used", readonly: true %>
+							</td>
+							<td>追加分<%= f.number_field :career_skills, class:"size", id:"career_skills_gain" %></td>
+						</tr>
+						<tr>
+							<td class="background">趣味P</td>
+							<td><%= f.number_field :hobby_skills, class:"size readonly", id:"hobby_skills", readonly: true %></td>
+							<td>/<%= f.number_field :hobby_skills, class:"size readonly", id:"hobby_skills_used", readonly: true %>
+							</td>
+							<td>追加分<%= f.number_field :hobby_skills, class:"size", id:"hobby_skills_gain", readonly: true %></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+
+			<div class="block_insert"></div>
+			<div class="form-row">
+				<div class="col-md-6">
+					<table border='1' bordercolor="black">
+						<tr class="background">
+							<th>戦闘技能</th>
+							<th>初期値</th>
+							<th>職業P</th>
+							<th>興味P</th>
+							<th>成長分</th>
+							<th>その他</th>
+							<th>合計</th>
+						</tr>
+
+						<tr>
+							<td class="background">回避</td>
+							<td>
+								<%= f.number_field :avoidance_default, class:"size readonly", id:"avoidance_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :avoidance_add_career, class:"size", id:"avoidance_add_career" %></td>
+							<td><%= f.number_field :avoidance_add_hobby, class:"size", id:"avoidance_add_hobby" %></td>
+							<td><%= f.number_field :avoidance_add_auxesis, class:"size", id:"avoidance_add_auxesis" %></td>
+							<td><%= f.number_field :avoidance_add_etcetera, class:"size", id:"avoidance_add_etcetera" %></td>
+							<td>
+								<%= f.number_field :avoidance_total, class:"size readonly", id:"avoidance_total",readonly: true %>
+							</td>
+						</tr>
+						<tr>
+							<td class="background">キック</td>
+							<td><%= f.number_field :kick_defalut, class:"size readonly", id:"kick_defalut", readonly: true %></td>
+							<td><%= f.number_field :kick_add_career, class:"size", id:"kick_add_career" %></td>
+							<td><%= f.number_field :kick_add_hobby, class:"size", id:"kick_add_hobby" %></td>
+							<td><%= f.number_field :kick_add_auxesis, class:"size", id:"kick_add_auxesis" %></td>
+							<td><%= f.number_field :kick_add_etcetera, class:"size", id:"kick_add_etcetera" %></td>
+							<td><%= f.number_field :kick_total, class:"size readonly", id:"kick_total",readonly: true,readonly: true %>
+							</td>
+						</tr>
+						<tr>
+							<td class="background">組み付き</td>
+							<td><%= f.number_field :grapple_defalut, class:"size readonly", id:"grapple_defalut", readonly: true %>
+							</td>
+							<td><%= f.number_field :grapple_add_career, class:"size", id:"grapple_add_career" %></td>
+							<td><%= f.number_field :grapple_add_hobby, class:"size", id:"grapple_add_hobby" %></td>
+							<td><%= f.number_field :grapple_add_auxesis, class:"size", id:"grapple_add_auxesis" %></td>
+							<td><%= f.number_field :grapple_add_etcetera, class:"size", id:"grapple_add_etcetera" %></td>
+							<td>
+								<%= f.number_field :grapple_total, class:"size readonly", id:"grapple_total",readonly: true,readonly: true %>
+							</td>
+						</tr>
+						<tr>
+							<td class="background">こぶし</td>
+							<td><%= f.number_field :fist_defalut, class:"size readonly", id:"fist_defalut", readonly: true %></td>
+							<td><%= f.number_field :fist_add_career, class:"size", id:"fist_add_career" %></td>
+							<td><%= f.number_field :fist_add_hobby, class:"size", id:"fist_add_hobby" %></td>
+							<td><%= f.number_field :fist_add_auxesis, class:"size", id:"fist_add_auxesis" %></td>
+							<td><%= f.number_field :fist_add_etcetera, class:"size", id:"fist_add_etcetera" %></td>
+							<td><%= f.number_field :fist_total, class:"size readonly", id:"fist_total",readonly: true,readonly: true %>
+							</td>
+						</tr>
+						<tr>
+							<td class="background">頭突き</td>
+							<td>
+								<%= f.number_field :head_butt_defalut, class:"size readonly", id:"head_butt_defalut", readonly: true %>
+							</td>
+							<td><%= f.number_field :head_butt_add_career, class:"size", id:"head_butt_add_career" %></td>
+							<td><%= f.number_field :head_butt_add_hobby, class:"size", id:"head_butt_add_hobby" %></td>
+							<td><%= f.number_field :head_butt_add_auxesis, class:"size", id:"head_butt_add_auxesis" %></td>
+							<td><%= f.number_field :head_butt_add_etcetera, class:"size", id:"head_butt_add_etcetera" %></td>
+							<td>
+								<%= f.number_field :head_butt_total, class:"size readonly", id:"head_butt_total",readonly: true,readonly: true %>
+							</td>
+						</tr>
+						<tr>
+							<td class="background">投擲</td>
+							<td><%= f.number_field :throw_defalut, class:"size readonly", id:"throw_defalut", readonly: true %>
+							</td>
+							<td><%= f.number_field :throw_add_career, class:"size", id:"throw_add_career" %></td>
+							<td><%= f.number_field :throw_add_hobby, class:"size", id:"throw_add_hobby" %></td>
+							<td><%= f.number_field :throw_add_auxesis, class:"size", id:"throw_add_auxesis" %></td>
+							<td><%= f.number_field :throw_add_etcetera, class:"size", id:"throw_add_etcetera" %></td>
+							<td>
+								<%= f.number_field :throw_total, class:"size readonly", id:"throw_total",readonly: true,readonly: true %>
+							</td>
+						</tr>
+						<tr>
+							<td class="background">マーシャルアーツ</td>
+							<td>
+								<%= f.number_field :martial_arts_default, class:"size readonly", id:"martial_arts_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :martial_arts_add_career, class:"size", id:"martial_arts_add_career" %></td>
+							<td><%= f.number_field :martial_arts_add_hobby, class:"size", id:"martial_arts_add_hobby" %></td>
+							<td><%= f.number_field :martial_arts_add_auxesis, class:"size", id:"martial_arts_add_auxesis" %></td>
+							<td><%= f.number_field :martial_arts_add_etcetera, class:"size", id:"martial_arts_add_etcetera" %></td>
+							<td><%= f.number_field :martial_arts_total, class:"size readonly", id:"martial_arts_total",readonly: true %>
+							</td>
+						</tr>
+						<tr>
+							<td class="background">ハンドガン</td>
+							<td>
+								<%= f.number_field :handgun_defalut, class:"size readonly", id:"handgun_defalut", readonly: true %>
+							</td>
+							<td><%= f.number_field :handgun_add_career, class:"size", id:"handgun_add_career" %></td>
+							<td><%= f.number_field :handgun_add_hobby, class:"size", id:"handgun_add_hobby" %></td>
+							<td><%= f.number_field :handgun_add_auxesis, class:"size", id:"handgun_add_auxesis" %></td>
+							<td><%= f.number_field :handgun_add_etcetera, class:"size", id:"handgun_add_etcetera" %></td>
+							<td><%= f.number_field :handgun_total, class:"size readonly", id:"handgun_total",readonly: true %></td>
+						</tr>
+						<tr>
+							<td class="background">ショットガン</td>
+							<td>
+								<%= f.number_field :shot_gun_defalut, class:"size readonly", id:"shot_gun_defalut", readonly: true %>
+							</td>
+							<td><%= f.number_field :shot_gun_add_career, class:"size", id:"shot_gun_add_career" %></td>
+							<td><%= f.number_field :shot_gun_add_hobby, class:"size", id:"shot_gun_add_hobby" %></td>
+							<td><%= f.number_field :shot_gun_add_auxesis, class:"size", id:"shot_gun_add_auxesis" %></td>
+							<td><%= f.number_field :shot_gun_add_etcetera, class:"size", id:"shot_gun_add_etcetera" %></td>
+							<td><%= f.number_field :shot_gun_total, class:"size readonly", id:"shot_gun_total",readonly: true %></td>
+						</tr>
+						<tr>
+							<td class="background">マシンガン</td>
+							<td>
+								<%= f.number_field :machine_gun_default, class:"size readonly", id:"machine_gun_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :machine_gun_add_career, class:"size", id:"machine_gun_add_career" %></td>
+							<td><%= f.number_field :machine_gun_add_hobby, class:"size", id:"machine_gun_add_hobby" %></td>
+							<td><%= f.number_field :machine_gun_add_auxesis, class:"size", id:"machine_gun_add_auxesis" %></td>
+							<td><%= f.number_field :machine_gun_add_etcetera, class:"size", id:"machine_gun_add_etcetera" %></td>
+							<td><%= f.number_field :machine_gun_total, class:"size readonly", id:"machine_gun_total",readonly: true %>
+							</td>
+						</tr>
+						<tr>
+							<td class="background">ライフル</td>
+							<td>
+								<%= f.number_field :rifle_default, class:"size readonly", id:"rifle_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :rifle_add_career, class:"size", id:"rifle_add_career" %></td>
+							<td><%= f.number_field :rifle_add_hobby, class:"size", id:"rifle_add_hobby" %></td>
+							<td><%= f.number_field :rifle_add_auxesis, class:"size", id:"rifle_add_auxesis" %></td>
+							<td><%= f.number_field :rifle_add_etcetera, class:"size", id:"rifle_add_etcetera" %></td>
+							<td><%= f.number_field :rifle_total, class:"size readonly", id:"rifle_total",readonly: true %></td>
+						</tr>
+						<tr class="background">
+							<th>戦闘技能</th>
+							<th>初期値</th>
+							<th>職業P</th>
+							<th>興味P</th>
+							<th>成長分</th>
+							<th>その他</th>
+							<th>合計</th>
+						</tr>
+					</table>
+				</div>
+
+				<div class="col-md-6">
+					<table border='1' bordercolor="black">
+						<tr class="background">
+							<th>探索技能</th>
+							<th>初期値</th>
+							<th>職業P</th>
+							<th>興味P</th>
+							<th>成長分</th>
+							<th>その他</th>
+							<th>合計</th>
+						</tr>
+						<tr>
+							<td class="background">応急手当</td>
+							<td>
+								<%= f.number_field :first_aid_default, class:"size readonly", id:"first_aid_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :first_aid_add_career, class:"size", id:"first_aid_add_career" %></td>
+							<td><%= f.number_field :first_aid_add_hobby, class:"size", id:"first_aid_add_hobby" %></td>
+							<td><%= f.number_field :first_aid_add_auxesis, class:"size", id:"first_aid_add_auxesis" %></td>
+							<td><%= f.number_field :first_aid_add_etcetera, class:"size", id:"first_aid_add_etcetera" %></td>
+							<td><%= f.number_field :first_aid_total, class:"size readonly", id:"first_aid_total",readonly: true %></td>
+						</tr>
+						<tr>
+							<td class="background">鍵開け</td>
+							<td>
+								<%= f.number_field :locksmith_default, class:"size readonly", id:"locksmith_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :locksmith_add_career, class:"size", id:"locksmith_add_career" %></td>
+							<td><%= f.number_field :locksmith_add_hobby, class:"size", id:"locksmith_add_hobby" %></td>
+							<td><%= f.number_field :locksmith_add_auxesis, class:"size", id:"locksmith_add_auxesis" %></td>
+							<td><%= f.number_field :locksmith_add_etcetera, class:"size", id:"locksmith_add_etcetera" %></td>
+							<td><%= f.number_field :locksmith_total, class:"size readonly", id:"locksmith_total",readonly: true %></td>
+						</tr>
+						<tr>
+							<td class="background">隠す</td>
+							<td>
+								<%= f.number_field :conceal_default, class:"size readonly", id:"conceal_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :conceal_add_career, class:"size", id:"conceal_add_career" %></td>
+							<td><%= f.number_field :conceal_add_hobby, class:"size", id:"conceal_add_hobby" %></td>
+							<td><%= f.number_field :conceal_add_auxesis, class:"size", id:"conceal_add_auxesis" %></td>
+							<td><%= f.number_field :conceal_add_etcetera, class:"size", id:"conceal_add_etcetera" %></td>
+							<td><%= f.number_field :conceal_total, class:"size readonly", id:"conceal_total",readonly: true %></td>
+						</tr>
+						<tr>
+							<td class="background">隠れる</td>
+							<td>
+								<%= f.number_field :hide_default, class:"size readonly", id:"hide_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :hide_add_career, class:"size", id:"hide_add_career" %></td>
+							<td><%= f.number_field :hide_add_hobby, class:"size", id:"hide_add_hobby" %></td>
+							<td><%= f.number_field :hide_add_auxesis, class:"size", id:"hide_add_auxesis" %></td>
+							<td><%= f.number_field :hide_add_etcetera, class:"size", id:"hide_add_etcetera" %></td>
+							<td><%= f.number_field :hide_total, class:"size readonly", id:"hide_total",readonly: true %></td>
+						</tr>
+						<tr>
+							<td class="background">聞き耳</td>
+							<td>
+								<%= f.number_field :listen_default, class:"size readonly", id:"listen_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :listen_add_career, class:"size", id:"listen_add_career" %></td>
+							<td><%= f.number_field :listen_add_hobby, class:"size", id:"listen_add_hobby" %></td>
+							<td><%= f.number_field :listen_add_auxesis, class:"size", id:"listen_add_auxesis" %></td>
+							<td><%= f.number_field :listen_add_etcetera, class:"size", id:"listen_add_etcetera" %></td>
+							<td><%= f.number_field :listen_total, class:"size readonly", id:"listen_total",readonly: true %></td>
+						</tr>
+						<tr>
+							<td class="background">忍び歩き</td>
+							<td>
+								<%= f.number_field :sneak_default, class:"size readonly", id:"sneak_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :sneak_add_career, class:"size", id:"sneak_add_career" %></td>
+							<td><%= f.number_field :sneak_add_hobby, class:"size", id:"sneak_add_hobby" %></td>
+							<td><%= f.number_field :sneak_add_auxesis, class:"size", id:"sneak_add_auxesis" %></td>
+							<td><%= f.number_field :sneak_add_etcetera, class:"size", id:"sneak_add_etcetera" %></td>
+							<td><%= f.number_field :sneak_total, class:"size readonly", id:"sneak_total",readonly: true %></td>
+						</tr>
+						<tr>
+							<td class="background">写真術</td>
+							<td>
+								<%= f.number_field :photography_default, class:"size readonly", id:"photography_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :photography_add_career, class:"size", id:"photography_add_career" %></td>
+							<td><%= f.number_field :photography_add_hobby, class:"size", id:"photography_add_hobby" %></td>
+							<td><%= f.number_field :photography_add_auxesis, class:"size", id:"photography_add_auxesis" %></td>
+							<td><%= f.number_field :photography_add_etcetera, class:"size", id:"photography_add_etcetera" %></td>
+							<td><%= f.number_field :photography_total, class:"size readonly", id:"photography_total",readonly: true %>
+							</td>
+						</tr>
+						<tr>
+							<td class="background">精神分析</td>
+							<td>
+								<%= f.number_field :psychoanalysis_default, class:"size readonly", id:"psychoanalysis_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :psychoanalysis_add_career, class:"size", id:"psychoanalysis_add_career" %></td>
+							<td><%= f.number_field :psychoanalysis_add_hobby, class:"size", id:"psychoanalysis_add_hobby" %></td>
+							<td><%= f.number_field :psychoanalysis_add_auxesis, class:"size", id:"psychoanalysis_add_auxesis" %></td>
+							<td><%= f.number_field :psychoanalysis_add_etcetera, class:"size", id:"psychoanalysis_add_etcetera" %></td>
+							<td>
+								<%= f.number_field :psychoanalysis_total, class:"size readonly", id:"psychoanalysis_total",readonly: true %>
+							</td>
+						</tr>
+						<tr>
+							<td class="background">追跡</td>
+							<td>
+								<%= f.number_field :track_default, class:"size readonly", id:"track_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :track_add_career, class:"size", id:"track_add_career" %></td>
+							<td><%= f.number_field :track_add_hobby, class:"size", id:"track_add_hobby" %></td>
+							<td><%= f.number_field :track_add_auxesis, class:"size", id:"track_add_auxesis" %></td>
+							<td><%= f.number_field :track_add_etcetera, class:"size", id:"track_add_etcetera" %></td>
+							<td><%= f.number_field :track_total, class:"size readonly", id:"track_total",readonly: true %></td>
+						</tr>
+						<tr>
+							<td class="background">登攀</td>
+							<td>
+								<%= f.number_field :climb_default, class:"size readonly", id:"climb_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :climb_add_career, class:"size", id:"climb_add_career" %></td>
+							<td><%= f.number_field :climb_add_hobby, class:"size", id:"climb_add_hobby" %></td>
+							<td><%= f.number_field :climb_add_auxesis, class:"size", id:"climb_add_auxesis" %></td>
+							<td><%= f.number_field :climb_add_etcetera, class:"size", id:"climb_add_etcetera" %></td>
+							<td><%= f.number_field :climb_total, class:"size readonly", id:"climb_total",readonly: true %></td>
+						</tr>
+						<tr>
+							<td class="background">図書館</td>
+							<td>
+								<%= f.number_field :library_use_default, class:"size readonly", id:"library_use_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :library_use_add_career, class:"size", id:"library_use_add_career" %></td>
+							<td><%= f.number_field :library_use_add_hobby, class:"size", id:"library_use_add_hobby" %></td>
+							<td><%= f.number_field :library_use_add_auxesis, class:"size", id:"library_use_add_auxesis" %></td>
+							<td><%= f.number_field :library_use_add_etcetera, class:"size", id:"library_use_add_etcetera" %></td>
+							<td><%= f.number_field :library_use_total, class:"size readonly", id:"library_use_total",readonly: true %>
+							</td>
+						</tr>
+						<tr>
+							<td class="background">目星</td>
+							<td>
+								<%= f.number_field :spot_hidden_default, class:"size readonly", id:"spot_hidden_default", readonly: true %>
+							</td>
+							<td><%= f.number_field :spot_hidden_add_career, class:"size", id:"spot_hidden_add_career" %></td>
+							<td><%= f.number_field :spot_hidden_add_hobby, class:"size", id:"spot_hidden_add_hobby" %></td>
+							<td><%= f.number_field :spot_hidden_add_auxesis, class:"size", id:"spot_hidden_add_auxesis" %></td>
+							<td><%= f.number_field :spot_hidden_add_etcetera, class:"size", id:"spot_hidden_add_etcetera" %></td>
+							<td><%= f.number_field :spot_hidden_total, class:"size readonly", id:"spot_hidden_total",readonly: true %>
+							</td>
+						</tr>
+
+						<tr class="background">
+							<th>探索技能</th>
+							<th>初期値</th>
+							<th>職業P</th>
+							<th>興味P</th>
+							<th>成長分</th>
+							<th>その他</th>
+							<th>合計</th>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="block_insert"></div>
+
+			<div class="form-row">
+			<div class="col-md-6">
+			<table border='1' bordercolor="black">
+				<tr class="background">
+					<th>行動技能</th>
+					<th>初期値</th>
+					<th>職業P</th>
+					<th>興味P</th>
+					<th>成長分</th>
+					<th>その他</th>
+					<th>合計</th>
+				</tr>
+				<tr>
+					<td class="background">運転</td>
+					<td>
+						<%= f.number_field :drive_automobile_default, class:"size readonly", id:"drive_automobile_default", readonly: true %>
+					</td>
+					<td><%= f.number_field :drive_automobile_add_career, class:"size", id:"drive_automobile_add_career" %></td>
+					<td><%= f.number_field :drive_automobile_add_hobby, class:"size", id:"drive_automobile_add_hobby" %></td>
+					<td><%= f.number_field :drive_automobile_add_auxesis, class:"size", id:"drive_automobile_add_auxesis" %>
+					</td>
+					<td><%= f.number_field :drive_automobile_add_etcetera, class:"size", id:"drive_automobile_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :drive_automobile_total, class:"size readonly", id:"drive_automobile_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">機械修理</td>
+					<td>
+						<%= f.number_field :electrical_repair_default, class:"size readonly", id:"electrical_repair_default", readonly: true %>
+					</td>
+					<td><%= f.number_field :electrical_repair_add_career, class:"size", id:"electrical_repair_add_career" %>
+					</td>
+					<td><%= f.number_field :electrical_repair_add_hobby, class:"size", id:"electrical_repair_add_hobby" %></td>
+					<td><%= f.number_field :electrical_repair_add_auxesis, class:"size", id:"electrical_repair_add_auxesis" %>
+					</td>
+					<td><%= f.number_field :electrical_repair_add_etcetera, class:"size", id:"electrical_repair_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :electrical_repair_total, class:"size readonly", id:"electrical_repair_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">重機械操作</td>
+					<td>
+						<%= f.number_field :operate_heavy_machine_default, class:"size readonly", id:"operate_heavy_machine_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :operate_heavy_machine_add_career, class:"size", id:"operate_heavy_machine_add_career" %>
+					</td>
+					<td>
+						<%= f.number_field :operate_heavy_machine_add_hobby, class:"size", id:"operate_heavy_machine_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :operate_heavy_machine_add_auxesis, class:"size", id:"operate_heavy_machine_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :operate_heavy_machine_add_etcetera, class:"size", id:"operate_heavy_machine_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :operate_heavy_machine_total, class:"size readonly", id:"operate_heavy_machine_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">乗馬</td>
+					<td>
+						<%= f.number_field :ride_horse_default, class:"size readonly", id:"ride_horse_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :ride_horse_add_career, class:"size", id:"ride_horse_add_career" %>
+					</td>
+					<td><%= f.number_field :ride_horse_add_hobby, class:"size", id:"ride_horse_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :ride_horse_add_auxesis, class:"size", id:"ride_horse_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :ride_horse_add_etcetera, class:"size", id:"ride_horse_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :ride_horse_total, class:"size readonly", id:"ride_horse_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">水泳</td>
+					<td>
+						<%= f.number_field :swim_default, class:"size readonly", id:"swim_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :swim_add_career, class:"size", id:"swim_add_career" %>
+					</td>
+					<td><%= f.number_field :swim_add_hobby, class:"size", id:"swim_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :swim_add_auxesis, class:"size", id:"swim_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :swim_add_etcetera, class:"size", id:"swim_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :swim_total, class:"size readonly", id:"swim_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">制作</td>
+					<td>
+						<%= f.number_field :production_default, class:"size readonly", id:"production_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :production_add_career, class:"size", id:"production_add_career" %>
+					</td>
+					<td><%= f.number_field :production_add_hobby, class:"size", id:"production_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :production_add_auxesis, class:"size", id:"production_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :production_add_etcetera, class:"size", id:"production_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :production_total, class:"size readonly", id:"production_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">操縦</td>
+					<td>
+						<%= f.number_field :maneuver_default, class:"size readonly", id:"maneuver_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :maneuver_add_career, class:"size", id:"maneuver_add_career" %>
+					</td>
+					<td><%= f.number_field :maneuver_add_hobby, class:"size", id:"maneuver_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :maneuver_add_auxesis, class:"size", id:"maneuver_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :maneuver_add_etcetera, class:"size", id:"maneuver_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :maneuver_total, class:"size readonly", id:"maneuver_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">跳躍</td>
+					<td>
+						<%= f.number_field :jumping_default, class:"size readonly", id:"jumping_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :jumping_add_career, class:"size", id:"jumping_add_career" %>
+					</td>
+					<td><%= f.number_field :jumping_add_hobby, class:"size", id:"jumping_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :jumping_add_auxesis, class:"size", id:"jumping_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :jumping_add_etcetera, class:"size", id:"jumping_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :jumping_total, class:"size readonly", id:"jumping_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">電気修理</td>
+					<td>
+						<%= f.number_field :electrical_repair_default, class:"size readonly", id:"electrical_repair_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :electrical_repair_add_career, class:"size", id:"electrical_repair_add_career" %>
+					</td>
+					<td><%= f.number_field :electrical_repair_add_hobby, class:"size", id:"electrical_repair_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :electrical_repair_add_auxesis, class:"size", id:"electrical_repair_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :electrical_repair_add_etcetera, class:"size", id:"electrical_repair_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :electrical_repair_total, class:"size readonly", id:"electrical_repair_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">ナビゲート</td>
+					<td>
+						<%= f.number_field :navigate_default, class:"size readonly", id:"navigate_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :navigate_add_career, class:"size", id:"navigate_add_career" %>
+					</td>
+					<td><%= f.number_field :navigate_add_hobby, class:"size", id:"navigate_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :navigate_add_auxesis, class:"size", id:"navigate_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :navigate_add_etcetera, class:"size", id:"navigate_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :navigate_total, class:"size readonly", id:"navigate_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">変装</td>
+					<td>
+						<%= f.number_field :disguise_default, class:"size readonly", id:"disguise_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :disguise_add_career, class:"size", id:"disguise_add_career" %>
+					</td>
+					<td><%= f.number_field :disguise_add_hobby, class:"size", id:"disguise_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :disguise_add_auxesis, class:"size", id:"disguise_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :disguise_add_etcetera, class:"size", id:"disguise_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :disguise_total, class:"size readonly", id:"disguise_total",readonly: true %>
+					</td>
+				</tr>
+				<tr class="background">
+					<th>行動技能</th>
+					<th>初期値</th>
+					<th>職業P</th>
+					<th>興味P</th>
+					<th>成長分</th>
+					<th>その他</th>
+					<th>合計</th>
+				</tr>
+			</table>
+			</div>
+			<div class="col-md-6">
+			<table border='1' bordercolor="black">
+				<tr class="background">
+					<th>交渉技能</th>
+					<th>初期値</th>
+					<th>職業P</th>
+					<th>興味P</th>
+					<th>成長分</th>
+					<th>その他</th>
+					<th>合計</th>
+				</tr>
+				<tr>
+					<td class="background">言いくるめ</td>
+					<td>
+						<%= f.number_field :win_over_default, class:"size readonly", id:"win_over_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :win_over_add_career, class:"size", id:"win_over_add_career" %>
+					</td>
+					<td><%= f.number_field :win_over_add_hobby, class:"size", id:"win_over_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :win_over_add_auxesis, class:"size", id:"win_over_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :win_over_add_etcetera, class:"size", id:"win_over_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :win_over_total, class:"size readonly", id:"win_over_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">信用</td>
+					<td>
+						<%= f.number_field :reliance_default, class:"size readonly", id:"reliance_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :reliance_add_career, class:"size", id:"reliance_add_career" %>
+					</td>
+					<td><%= f.number_field :reliance_add_hobby, class:"size", id:"reliance_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :reliance_add_auxesis, class:"size", id:"reliance_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :reliance_add_etcetera, class:"size", id:"reliance_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :reliance_total, class:"size readonly", id:"reliance_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">説得</td>
+					<td>
+						<%= f.number_field :persuasion_defalut, class:"size readonly", id:"persuasion_defalut", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :persuasion_add_career, class:"size", id:"persuasion_add_career" %>
+					</td>
+					<td><%= f.number_field :persuasion_add_hobby, class:"size", id:"persuasion_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :persuasion_add_auxesis, class:"size", id:"persuasion_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :persuasion_add_etcetera, class:"size", id:"persuasion_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :persuasion_total, class:"size readonly", id:"persuasion_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">値切り</td>
+					<td>
+						<%= f.number_field :haggling_default, class:"size readonly", id:"haggling_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :haggling_add_career, class:"size", id:"haggling_add_career" %>
+					</td>
+					<td><%= f.number_field :haggling_add_hobby, class:"size", id:"haggling_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :haggling_add_auxesis, class:"size", id:"haggling_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :haggling_add_etcetera, class:"size", id:"haggling_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :haggling_total, class:"size readonly", id:"haggling_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">母国語</td>
+					<td>
+						<%= f.number_field :native_language_default, class:"size readonly", id:"native_language_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :native_language_add_career, class:"size", id:"native_language_add_career" %>
+					</td>
+					<td><%= f.number_field :native_language_add_hobby, class:"size", id:"native_language_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :native_language_add_auxesis, class:"size", id:"native_language_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :native_language_add_etcetera, class:"size", id:"native_language_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :native_language_total, class:"size readonly", id:"native_language_total",readonly: true %>
+					</td>
+				</tr>
+				<tr class="background">
+					<th>交渉技能</th>
+					<th>初期値</th>
+					<th>職業P</th>
+					<th>興味P</th>
+					<th>成長分</th>
+					<th>その他</th>
+					<th>合計</th>
+				</tr>
+			</table>
+		</div>
+		</div>
+
+<div class="block_insert"></div>
+			<table border='1' bordercolor="black">
+				<tr class="background">
+					<th>知識技能</th>
+					<th>初期値</th>
+					<th>職業P</th>
+					<th>興味P</th>
+					<th>成長分</th>
+					<th>その他</th>
+					<th>合計</th>
+				</tr>
+				<tr>
+					<td class="background">医学</td>
+					<td>
+						<%= f.number_field :medicine_default, class:"size readonly", id:"medicine_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :medicine_add_career, class:"size", id:"medicine_add_career" %>
+					</td>
+					<td><%= f.number_field :medicine_add_hobby, class:"size", id:"medicine_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :medicine_add_auxesis, class:"size", id:"medicine_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :medicine_add_etcetera, class:"size", id:"medicine_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :medicine_total, class:"size readonly", id:"medicine_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">オカルト</td>
+					<td>
+						<%= f.number_field :occult_default, class:"size readonly", id:"occult_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :occult_add_career, class:"size", id:"occult_add_career" %>
+					</td>
+					<td><%= f.number_field :occult_add_hobby, class:"size", id:"occult_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :occult_add_auxesis, class:"size", id:"occult_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :occult_add_etcetera, class:"size", id:"occult_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :occult_total, class:"size readonly", id:"occult_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">科学</td>
+					<td>
+						<%= f.number_field :science_default, class:"size readonly", id:"science_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :science_add_career, class:"size", id:"science_add_career" %>
+					</td>
+					<td><%= f.number_field :science_add_hobby, class:"size", id:"science_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :science_add_auxesis, class:"size", id:"science_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :science_add_etcetera, class:"size", id:"science_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :science_total, class:"size readonly", id:"science_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">クトゥルフ神話</td>
+					<td>
+						<%= f.number_field :cthulhu_mythos_default, class:"size readonly", id:"cthulhu_mythos_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :cthulhu_mythos_add_career, class:"size", id:"cthulhu_mythos_add_career" %>
+					</td>
+					<td><%= f.number_field :cthulhu_mythos_add_hobby, class:"size", id:"cthulhu_mythos_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :cthulhu_mythos_add_auxesis, class:"size", id:"cthulhu_mythos_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :cthulhu_mythos_add_etcetera, class:"size", id:"cthulhu_mythos_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :cthulhu_mythos_total, class:"size readonly", id:"cthulhu_mythos_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">芸術</td>
+					<td>
+						<%= f.number_field :art_default, class:"size readonly", id:"art_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :art_add_career, class:"size", id:"art_add_career" %>
+					</td>
+					<td><%= f.number_field :art_add_hobby, class:"size", id:"art_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :art_add_auxesis, class:"size", id:"art_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :art_add_etcetera, class:"size", id:"art_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :art_total, class:"size readonly", id:"art_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">経理</td>
+					<td>
+						<%= f.number_field :finance_default, class:"size readonly", id:"finance_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :finance_add_career, class:"size", id:"finance_add_career" %>
+					</td>
+					<td><%= f.number_field :finance_add_hobby, class:"size", id:"finance_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :finance_add_etcetera, class:"size", id:"finance_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :art_add_etcetera, class:"size", id:"art_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :finance_total, class:"size readonly", id:"finance_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">考古学</td>
+					<td>
+						<%= f.number_field :archaeology_default, class:"size readonly", id:"archaeology_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :archaeology_add_career, class:"size", id:"archaeology_add_career" %>
+					</td>
+					<td><%= f.number_field :archaeology_add_hobby, class:"size", id:"archaeology_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :archaeology_add_auxesis, class:"size", id:"archaeology_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :archaeology_add_etcetera, class:"size", id:"archaeology_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :archaeology_total, class:"size readonly", id:"archaeology_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">コンピューター</td>
+					<td>
+						<%= f.number_field :computer_default, class:"size readonly", id:"computer_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :computer_add_career, class:"size", id:"computer_add_career" %>
+					</td>
+					<td><%= f.number_field :computer_add_hobby, class:"size", id:"computer_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :computer_add_auxesis, class:"size", id:"computer_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :computer_add_etcetera, class:"size", id:"computer_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :computer_total, class:"size readonly", id:"computer_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">心理学</td>
+					<td>
+						<%= f.number_field :psychology_default, class:"size readonly", id:"psychology_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :psychology_add_career, class:"size", id:"psychology_add_career" %>
+					</td>
+					<td><%= f.number_field :psychology_add_hobby, class:"size", id:"psychology_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :psychology_add_auxesis, class:"size", id:"psychology_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :psychology_add_etcetera, class:"size", id:"psychology_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :psychology_total, class:"size readonly", id:"psychology_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">人類学</td>
+					<td>
+						<%= f.number_field :anthropology_default, class:"size readonly", id:"anthropology_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :anthropology_add_career, class:"size", id:"anthropology_add_career" %>
+					</td>
+					<td><%= f.number_field :anthropology_add_hobby, class:"size", id:"anthropology_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :anthropology_add_auxesis, class:"size", id:"anthropology_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :anthropology_add_etcetera, class:"size", id:"anthropology_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :anthropology_total, class:"size readonly", id:"anthropology_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">生物学</td>
+					<td>
+						<%= f.number_field :biology_default, class:"size readonly", id:"biology_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :biology_add_career, class:"size", id:"biology_add_career" %>
+					</td>
+					<td><%= f.number_field :biology_add_hobby, class:"size", id:"biology_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :biology_add_auxesis, class:"size", id:"biology_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :biology_add_etcetera, class:"size", id:"biology_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :biology_total, class:"size readonly", id:"biology_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">地質学</td>
+					<td>
+						<%= f.number_field :geology_default, class:"size readonly", id:"geology_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :geology_add_career, class:"size", id:"geology_add_career" %>
+					</td>
+					<td><%= f.number_field :geology_add_hobby, class:"size", id:"geology_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :geology_add_auxesis, class:"size", id:"geology_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :geology_add_etcetera, class:"size", id:"geology_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :geology_total, class:"size readonly", id:"geology_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">電気工学</td>
+					<td>
+						<%= f.number_field :electronics_default, class:"size readonly", id:"electronics_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :electronics_add_career, class:"size", id:"electronics_add_career" %>
+					</td>
+					<td><%= f.number_field :electronics_add_hobby, class:"size", id:"electronics_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :electronics_add_auxesis, class:"size", id:"electronics_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :electronics_add_etcetera, class:"size", id:"electronics_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :electronics_total, class:"size readonly", id:"electronics_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">天文学</td>
+					<td>
+						<%= f.number_field :astronomy_default, class:"size readonly", id:"astronomy_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :astronomy_add_career, class:"size", id:"astronomy_add_career" %>
+					</td>
+					<td><%= f.number_field :astronomy_add_hobby, class:"size", id:"astronomy_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :astronomy_add_auxesis, class:"size", id:"astronomy_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :astronomy_add_etcetera, class:"size", id:"astronomy_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :astronomy_total, class:"size readonly", id:"astronomy_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">博物学</td>
+					<td>
+						<%= f.number_field :natural_history_default, class:"size readonly", id:"natural_history_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :natural_history_add_career, class:"size", id:"natural_history_add_career" %>
+					</td>
+					<td><%= f.number_field :natural_history_add_hobby, class:"size", id:"natural_history_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :natural_history_add_auxesis, class:"size", id:"natural_history_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :natural_history_add_etcetera, class:"size", id:"natural_history_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :natural_history_total, class:"size readonly", id:"natural_history_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">物理学</td>
+					<td>
+						<%= f.number_field :physics_default, class:"size readonly", id:"physics_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :physics_add_career, class:"size", id:"physics_add_career" %>
+					</td>
+					<td><%= f.number_field :physics_add_hobby, class:"size", id:"physics_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :physics_add_auxesis, class:"size", id:"physics_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :physics_add_etcetera, class:"size", id:"physics_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :physics_total, class:"size readonly", id:"physics_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">法律</td>
+					<td>
+						<%= f.number_field :law_default, class:"size readonly", id:"law_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :law_add_career, class:"size", id:"law_add_career" %>
+					</td>
+					<td><%= f.number_field :law_add_hobby, class:"size", id:"law_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :law_add_auxesis, class:"size", id:"law_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :law_add_etcetera, class:"size", id:"law_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :law_total, class:"size readonly", id:"law_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">薬学</td>
+					<td>
+						<%= f.number_field :pharmacy_default, class:"size readonly", id:"pharmacy_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :pharmacy_add_career, class:"size", id:"pharmacy_add_career" %>
+					</td>
+					<td><%= f.number_field :pharmacy_add_hobby, class:"size", id:"pharmacy_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :pharmacy_add_auxesis, class:"size", id:"pharmacy_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :pharmacy_add_etcetera, class:"size", id:"pharmacy_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :pharmacy_total, class:"size readonly", id:"pharmacy_total",readonly: true %>
+					</td>
+				</tr>
+				<tr>
+					<td class="background">歴史</td>
+					<td>
+						<%= f.number_field :historical_science_default, class:"size readonly", id:"historical_science_default", readonly: true %>
+					</td>
+					<td>
+						<%= f.number_field :historical_science_add_career, class:"size", id:"historical_science_add_career" %>
+					</td>
+					<td><%= f.number_field :historical_science_add_hobby, class:"size", id:"historical_science_add_hobby" %>
+					</td>
+					<td>
+						<%= f.number_field :historical_science_add_auxesis, class:"size", id:"historical_science_add_auxesis" %>
+					</td>
+					<td>
+						<%= f.number_field :historical_science_add_etcetera, class:"size", id:"historical_science_add_etcetera" %>
+					</td>
+					<td>
+						<%= f.number_field :historical_science_total, class:"size readonly", id:"historical_science_total",readonly: true %>
+					</td>
+				</tr>
+				<tr class="background">
+					<th>知識技能</th>
+					<th>初期値</th>
+					<th>職業P</th>
+					<th>興味P</th>
+					<th>成長分</th>
+					<th>その他</th>
+					<th>合計</th>
+				</tr>
+			</table>
+			<% end %>
+		</div>
+	</div>
+</div>
+<div class="block_insert"></div>
